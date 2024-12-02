@@ -4,11 +4,15 @@ use std::io::BufRead;
 use std::path::Path;
 
 mod day_one;
+mod day_two;
 
 fn main() {
     println!("Day one");
     day_one::first_task();
     day_one::second_task();
+    println!("Day two");
+    day_two::first_task();
+    day_two::second_task(); // > 209
 }
 
 fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>

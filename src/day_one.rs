@@ -22,13 +22,13 @@ pub fn first_task() {
     let mut distance_sum = 0;
 
     for (first, second) in zipped {
-        println!("{}-{}", first, second);
+        // println!("{}-{}", first, second);
         let distance = first - second;
         let distance = distance.abs();
         distance_sum += distance;
     }
 
-    println!("{}", distance_sum);
+    println!("Answer 1/2: {}", distance_sum);
 }
 
 pub fn second_task() {
@@ -44,10 +44,13 @@ pub fn second_task() {
         second_list.push(b.trim().parse::<i64>().unwrap());
     });
 
-    let sum_occurrences = first_list.into_iter().map(|l| {
-        let occurrences = second_list.iter().filter(|&r| l == *r).count() as i64;
-        l * occurrences
-    }).sum::<i64>();
+    let sum_occurrences = first_list
+        .into_iter()
+        .map(|l| {
+            let occurrences = second_list.iter().filter(|&r| l == *r).count() as i64;
+            l * occurrences
+        })
+        .sum::<i64>();
 
-    println!("{}", sum_occurrences);
+    println!("Answer 2/2: {}", sum_occurrences);
 }
