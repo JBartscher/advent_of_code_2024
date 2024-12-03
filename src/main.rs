@@ -5,6 +5,7 @@ use std::path::Path;
 
 mod day_one;
 mod day_two;
+mod day_three;
 
 fn main() {
     println!("Day one");
@@ -13,6 +14,9 @@ fn main() {
     println!("Day two");
     day_two::first_task();
     day_two::second_task(); // > 209
+    println!("Day three");
+    day_three::first_task();
+    day_three::second_task(); // > 209
 }
 
 fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>

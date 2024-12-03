@@ -30,7 +30,7 @@ pub fn second_task() {
             || is_steadily_climbing_with_one_strike_allowed(&report)
         {
             valid = valid + 1;
-            println!("{:?}", &report);
+           // println!("{:?}", &report);
         } else {
             //
         }
