@@ -20,7 +20,7 @@ fn main() {
     day_three::second_task();
     println!("Day four");
     day_four::first_task();
-
+    day_four::second_task();
 }
 
 fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
