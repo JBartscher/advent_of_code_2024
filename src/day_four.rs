@@ -4,8 +4,6 @@ const MIN: usize = 0;
 const MAX: usize = 140;
 
 pub fn first_task() {
-    let mut array_2d: [[char; MAX]; MAX];
-
     let mut rows: Vec<Vec<char>> = Vec::new();
 
     let input = read_input("./input/4");
@@ -18,60 +16,20 @@ pub fn first_task() {
 
     for y in MIN..MAX {
         for x in MIN..MAX {
-            print!("{}", rows[y][x]);
-            if check_vertical(x, y, &rows) {
-                sum_of_xmas = sum_of_xmas + 1;
-            }
-            if check_horizontal(x, y, &rows) {
-                sum_of_xmas = sum_of_xmas + 1;
-            }
-            if check_diagonals(x, y, &rows) {
-                sum_of_xmas = sum_of_xmas + 1;
-            }
+            sum_of_xmas = sum_of_xmas + check_vertical(x, y, &rows);
+            sum_of_xmas = sum_of_xmas + check_horizontal(x, y, &rows);
+            sum_of_xmas = sum_of_xmas + check_diagonals(x, y, &rows);
         }
         print!("\n");
     }
 
-    println!("Answer 1/2: {}", sum_of_xmas); // > 1523 < 2542
+    println!("Answer 1/2: {}", sum_of_xmas); // > 1523 > 2153 < 2542
 }
 
-fn check_diagonals(x: usize, y: usize, rows: &Vec<Vec<char>>) -> bool {
+fn check_diagonals(x: usize, y: usize, rows: &Vec<Vec<char>>) -> usize {
+    let mut count = 0;
+
     match rows[y][x] {
-        // 'S' => {
-        //     // ↖
-        //     if (x >= 3 && y >= 3)
-        //         && (rows[y - 1][x - 1] == 'A'
-        //             && rows[y - 2][x - 2] == 'M'
-        //             && rows[y - 3][x - 3] == 'X')
-        //     {
-        //         return true;
-        //     }
-        //     // ↗
-        //     if (MAX - x > 3 && y >= 3)
-        //         && (rows[y - 1][x + 1] == 'A'
-        //             && rows[y - 2][x + 2] == 'M'
-        //             && rows[y - 3][x + 3] == 'X')
-        //     {
-        //         return true;
-        //     }
-        //     // ↙
-        //     if (x >= 3 && MAX - y > 3)
-        //         && (rows[y + 1][x - 1] == 'A'
-        //             && rows[y + 2][x - 2] == 'M'
-        //             && rows[y + 3][x - 3] == 'X')
-        //     {
-        //         return true;
-        //     }
-        //     // ↘
-        //     if (MAX - x > 3 && MAX - y > 3)
-        //         && (rows[y + 1][x + 1] == 'A'
-        //             && rows[y + 2][x + 2] == 'M'
-        //             && rows[y + 3][x + 3] == 'X')
-        //     {
-        //         return true;
-        //     }
-        //     false
-        // }
         'X' => {
             // ↖
             if (x >= 3 && y >= 3)
@@ -79,7 +37,7 @@ fn check_diagonals(x: usize, y: usize, rows: &Vec<Vec<char>>) -> bool {
                     && rows[y - 2][x - 2] == 'A'
                     && rows[y - 3][x - 3] == 'S')
             {
-                return true;
+                count += 1;
             }
             // ↗
             if (MAX - x > 3 && y >= 3)
@@ -87,7 +45,7 @@ fn check_diagonals(x: usize, y: usize, rows: &Vec<Vec<char>>) -> bool {
                     && rows[y - 2][x + 2] == 'A'
                     && rows[y - 3][x + 3] == 'S')
             {
-                return true;
+                count += 1;
             }
             // ↙
             if (x >= 3 && MAX - y > 3)
@@ -95,7 +53,7 @@ fn check_diagonals(x: usize, y: usize, rows: &Vec<Vec<char>>) -> bool {
                     && rows[y + 2][x - 2] == 'A'
                     && rows[y + 3][x - 3] == 'S')
             {
-                return true;
+                count += 1;
             }
             // ↘
             if (MAX - x > 3 && MAX - y > 3)
@@ -103,80 +61,56 @@ fn check_diagonals(x: usize, y: usize, rows: &Vec<Vec<char>>) -> bool {
                     && rows[y + 2][x + 2] == 'A'
                     && rows[y + 3][x + 3] == 'S')
             {
-                return true;
+                count += 1;
             }
-            false
         }
-        _ => false,
+        _ => {}
     }
+    count
 }
 
-fn check_horizontal(x: usize, y: usize, rows: &Vec<Vec<char>>) -> bool {
+fn check_horizontal(x: usize, y: usize, rows: &Vec<Vec<char>>) -> usize {
+    let mut count = 0;
+
     match rows[y][x] {
         'X' => {
             // →
             if (MAX - x > 3)
                 && (rows[y][x + 1] == 'M' && rows[y][x + 2] == 'A' && rows[y][x + 3] == 'S')
             {
-                return true;
+                count = count + 1;
             }
             // ←
             if (x >= 3) && (rows[y][x - 1] == 'M' && rows[y][x - 2] == 'A' && rows[y][x - 3] == 'S')
             {
-                return true;
+                count = count + 1;
             }
-            false
         }
-        // 'S' => {
-        //     // →
-        //     if (MAX - x > 3)
-        //         && (rows[y][x + 1] == 'A' && rows[y][x + 2] == 'M' && rows[y][x + 3] == 'X')
-        //     {
-        //         return true;
-        //     }
-        //     // ←
-        //     if (x >= 3) && (rows[y][x - 1] == 'A' && rows[y][x - 2] == 'M' && rows[y][x - 3] == 'X')
-        //     {
-        //         return true;
-        //     }
-        //     false
-        // }
-        _ => false,
+        _ => {}
     }
+    count
 }
 
-fn check_vertical(x: usize, y: usize, rows: &Vec<Vec<char>>) -> bool {
+fn check_vertical(x: usize, y: usize, rows: &Vec<Vec<char>>) -> usize {
+    let mut count = 0;
+
     match rows[y][x] {
         'X' => {
             // ↑
             if (y >= 3) && (rows[y - 1][x] == 'M' && rows[y - 2][x] == 'A' && rows[y - 3][x] == 'S')
             {
-                return true;
+                count = count + 1;
             }
             // ↓
             if (MAX - y > 3)
                 && (rows[y + 1][x] == 'M' && rows[y + 2][x] == 'A' && rows[y + 3][x] == 'S')
             {
-                return true;
+                count = count + 1;
             }
-            false
         }
-        'S' => {
-            // ↑
-            if (y >= 3) && (rows[y - 1][x] == 'A' && rows[y - 2][x] == 'M' && rows[y - 3][x] == 'X')
-            {
-                return true;
-            }
-            // ↓
-            if (MAX - y > 3)
-                && (rows[y + 1][x] == 'A' && rows[y + 2][x] == 'M' && rows[y + 3][x] == 'X')
-            {
-                return true;
-            }
-            false
-        }
-        _ => false,
+        _ => {}
     }
+    count
 }
 
 pub fn second_task() {
