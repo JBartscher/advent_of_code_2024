@@ -29,8 +29,6 @@ pub fn first_task() {
         results.push(a.parse::<i64>().unwrap() * (b.parse::<i64>().unwrap()));
     }
 
-   // println!("{:?}", results);
-
     let answer: i64 = results.into_iter().sum();
     println!("Answer 1/2: {}", answer);
 }
@@ -46,7 +44,6 @@ pub fn second_task() {
         .unwrap();
 
     let cleaned_text = TASK_TWO_REMOVE_DONT_BLOCKS.replace_all(input.as_str(), "").to_string();
-    println!("{:?}", cleaned_text);
 
     let mut results = vec![];
 

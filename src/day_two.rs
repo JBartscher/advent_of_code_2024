@@ -30,9 +30,6 @@ pub fn second_task() {
             || is_steadily_climbing_with_one_strike_allowed(&report)
         {
             valid = valid + 1;
-           // println!("{:?}", &report);
-        } else {
-            //
         }
     });
 
@@ -41,9 +38,11 @@ pub fn second_task() {
 
 fn is_steadily_declining(report: &[i64]) -> bool {
     let iter = report.iter().enumerate();
-
-    for (i, n) in iter.skip(1) {
-        let b = report.get(i - 1).unwrap();
+    for (i, b) in iter {
+        if i == report.len() - 1 {
+            break;
+        }
+        let n = report.get(i + 1).unwrap();
         if n >= b || b - n > 3 {
             return false;
         }
@@ -53,10 +52,13 @@ fn is_steadily_declining(report: &[i64]) -> bool {
 }
 
 fn is_steadily_declining_with_one_strike_allowed(report: &[i64]) -> bool {
-    let iter = report.iter().enumerate();
+        let iter = report.iter().enumerate();
 
-    for (i, n) in iter.skip(1) {
-        let b = report.get(i - 1).unwrap();
+    for (i, b) in iter {
+        if i == report.len() - 1 {
+            break;
+        }
+        let n = report.get(i + 1).unwrap();
         if n >= b || b - n > 3 {
             let mut vec_report: Vec<i64> = report.iter().cloned().collect();
             vec_report.remove(i);
@@ -68,9 +70,11 @@ fn is_steadily_declining_with_one_strike_allowed(report: &[i64]) -> bool {
 }
 fn is_steadily_climbing(report: &[i64]) -> bool {
     let iter = report.iter().enumerate();
-
-    for (i, n) in iter.skip(1) {
-        let b = report.get(i - 1).unwrap();
+    for (i, b) in iter {
+        if i == report.len() - 1 {
+            break;
+        }
+        let n = report.get(i + 1).unwrap();
         if b >= n || n - b > 3 {
             return false;
         }
@@ -81,8 +85,11 @@ fn is_steadily_climbing(report: &[i64]) -> bool {
 fn is_steadily_climbing_with_one_strike_allowed(report: &[i64]) -> bool {
     let iter = report.iter().enumerate();
 
-    for (i, n) in iter.skip(1) {
-        let b = report.get(i - 1).unwrap();
+    for (i, b) in iter {
+        if i == report.len() - 1 {
+            break;
+        }
+        let n = report.get(i + 1).unwrap();
         if b >= n || n - b > 3 {
             let mut vec_report: Vec<i64> = report.iter().cloned().collect();
             vec_report.remove(i);
@@ -155,6 +162,10 @@ mod tests {
     fn is_steadily_climbing_with_one_strike_allowed_works() {
         assert_eq!(
             is_steadily_climbing_with_one_strike_allowed(&[1, 2, 3, 4]),
+            true
+        );
+        assert_eq!(
+            is_steadily_climbing_with_one_strike_allowed(&[15, 19, 22, 23, 25, 27]),
             true
         );
         assert_eq!(
