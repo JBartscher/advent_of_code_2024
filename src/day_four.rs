@@ -20,7 +20,6 @@ pub fn first_task() {
             sum_of_xmas = sum_of_xmas + check_horizontal(x, y, &rows);
             sum_of_xmas = sum_of_xmas + check_diagonals(x, y, &rows);
         }
-        print!("\n");
     }
 
     println!("Answer 1/2: {}", sum_of_xmas); // > 1523 > 2153 < 2542
@@ -128,7 +127,6 @@ pub fn second_task() {
         for x in MIN..MAX {
             sum_of_x_mas = sum_of_x_mas + check_x_mas(x, y, &rows);
         }
-        print!("\n");
     }
 
     println!("Answer 2/2: {}", sum_of_x_mas);
