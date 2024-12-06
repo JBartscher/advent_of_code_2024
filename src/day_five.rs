@@ -24,7 +24,7 @@ pub fn first_task() {
         })
         .collect::<Vec<_>>();
 
-    println!("{:?}", pages);
+   // println!("{:?}", pages);
 
     for p in pages.iter(){
         for r in &rules {
