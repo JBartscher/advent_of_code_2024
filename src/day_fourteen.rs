@@ -157,7 +157,7 @@ pub fn second_task() {
     loop {
         robots.iter_mut().for_each(|mut r| r.tick(map_w, map_h));
         if let true = test_no_overlapping(&robots) {
-            debug_grid(map_w, map_h, &robots);
+           // debug_grid(map_w, map_h, &robots);
             break; // the second iterration of this is true
             // let mut buffer = String::new();
             // io::stdin().read_line(&mut buffer).unwrap();
