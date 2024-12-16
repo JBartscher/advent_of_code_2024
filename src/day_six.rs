@@ -1,7 +1,6 @@
 use crate::read_input;
-use itertools::Itertools;
 use lazy_static::lazy_static;
-use std::collections::{HashSet, VecDeque};
+use std::collections::{HashSet};
 use std::sync::Mutex;
 use std::thread;
 
@@ -133,7 +132,7 @@ fn traverse_maze(
         return traverse_maze(position, maze, new_direction, collect);
     }
 
-    if (collect) {
+    if collect {
         VISITED_LOCATIONS
             .lock()
             .unwrap()
@@ -192,7 +191,7 @@ fn traverse_maze_with_obstacle(
         );
     }
 
-    if (recursion_depth > 25000){
+    if recursion_depth > 25000 {
         println!("we encountered  a loop");
         return 1;
     }
