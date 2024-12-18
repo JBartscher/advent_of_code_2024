@@ -12,6 +12,7 @@ mod day_five;
 mod day_six;
 mod day_fourteen;
 mod day_thirteen;
+mod day_eighteen;
 
 fn main() {
     println!("Day one");
@@ -37,6 +38,9 @@ fn main() {
     println!("Day fourteen");
     day_fourteen::first_task();
     day_fourteen::second_task();
+    println!("Day eighteen");
+    day_eighteen::first_task();
+    day_eighteen::second_task();
 }
 
 fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
