@@ -1,7 +1,7 @@
 use std::collections::HashSet;
 use std::io;
 use std::num::ParseIntError;
-use std::ops::Not;
+use std::ops::{Not, Range};
 use pathfinding::prelude::astar;
 use crate::read_input;
 
@@ -101,10 +101,41 @@ pub fn first_task() {
 
 
 pub fn second_task() {
-    let input = read_input("./input/14");
+    let input = read_input("./input/18");
 
+    let mut taken_positions: Vec<Position> = Vec::new();
 
-    println!("Answer 2/2: {}", 0);
+    input.iter().for_each(|l| {
+        let (x, y) = l.split_at(l.find(',').unwrap());
+        let p: Position = (x, y).into();
+        taken_positions.push(p);
+    });
+
+    let size = 70;
+
+    let final_position: Position = Position { x: size, y: size };
+
+    // takes ages so we start @ 3000 -> with my input its 3045
+    let range = Range { start: 3000, end: taken_positions.len() };
+
+    let mut last_successful_pathfinding = 0;
+
+    for i in range {
+        let result = astar(&Position { x: 0, y: 0 }, |p| p.successors(&size, &taken_positions[0..i]), |p| 1,
+                           |p| *p == final_position);
+        match result {
+            None => {
+                last_successful_pathfinding = i -1;
+                // no result was found -> the last iteration was the last possible way to access the final position
+                break;
+            }
+            Some(r) => {
+                // found a way to final position -> continue
+                println!("index {} found a way in {} moves", i, r.1)
+            }
+        }
+    }
+    println!("Answer 2/2: {:?}", taken_positions[last_successful_pathfinding]);
 }
 
 #[cfg(test)]
@@ -114,7 +145,7 @@ mod tests {
     use crate::read_input;
 
     #[test]
-    fn simulate_run() {
+    fn simulate_task_one_run() {
         let input = read_input("./input/18_test");
 
         let mut taken_positions: Vec<Position> = Vec::new();
