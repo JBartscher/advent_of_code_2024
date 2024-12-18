@@ -1,6 +1,3 @@
-use std::collections::HashSet;
-use std::io;
-use std::num::ParseIntError;
 use std::ops::{Not, Range};
 use pathfinding::prelude::astar;
 use crate::read_input;
@@ -116,7 +113,7 @@ pub fn second_task() {
     let final_position: Position = Position { x: size, y: size };
 
     // takes ages so we start @ 3000 -> with my input its 3045
-    let range = Range { start: 3000, end: taken_positions.len() };
+    let range = Range { start: 3040, end: taken_positions.len() };
 
     let mut last_successful_pathfinding = 0;
 
@@ -131,7 +128,7 @@ pub fn second_task() {
             }
             Some(r) => {
                 // found a way to final position -> continue
-                println!("index {} found a way in {} moves", i, r.1)
+                // println!("index {} found a way in {} moves", i, r.1)
             }
         }
     }

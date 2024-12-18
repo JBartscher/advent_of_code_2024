@@ -13,8 +13,6 @@ pub fn first_task() {
         })
         .collect::<Vec<_>>();
 
-    // println!("{:?}", rules);
-
     let pages = pages
         .iter()
         .map(|l| {
