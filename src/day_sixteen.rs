@@ -122,27 +122,6 @@ impl Position {
     }
 }
 
-// fn debug_grid(w: usize, h: usize, walls: HashSet<Position>, start_position: &Position, final_position: &Position) {
-//     println!();
-//     for y in 0..h {
-//         for x in 0..w {
-//             if x == start_position.x && y == start_position.y {
-//                 print!("S");
-//                 continue;
-//             }
-//             if x == final_position.x && y == final_position.y {
-//                 print!("E");
-//                 continue;
-//             }
-//             match walls.iter().filter(|r| { r.x == x && r.y == y }).count() {
-//                 0 => { print!(".") }
-//                 n => { print!("{}", "#") }
-//             }
-//         }
-//         println!();
-//     }
-// }
-
 fn build_maze(input: Vec<String>) -> (HashSet<Position>, Position, Position) {
     let mut walls: HashSet<Position> = HashSet::new();
     let mut start_position = Position { x: 0, y: 0 };
