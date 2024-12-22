@@ -14,6 +14,7 @@ mod day_fourteen;
 mod day_thirteen;
 mod day_eighteen;
 mod day_sixteen;
+mod day_nineteen;
 mod day_twentytwo;
 
 fn main() {
@@ -46,6 +47,8 @@ fn main() {
     println!("Day eighteen");
     day_eighteen::first_task();
     day_eighteen::second_task();
+    println!("Day nineteen");
+    day_nineteen::first_task();
     println!("Day twentytwo");
     day_twentytwo::first_task();
 }
